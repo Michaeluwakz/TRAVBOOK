@@ -124,3 +124,35 @@ TravBook/
 
 The combination of semantic HTML and layered CSS results in a polished travel booking experience with strong typographic hierarchy, responsive visuals, and intuitive interactions.
 
+## Enhancement Log – HTML, CSS, and JavaScript Layer
+
+### HTML Refinements
+- **Inline Greeting Flow**: Added `onload` handling on `<body>` to launch an alert, collect `window.prompt` input for name/topic, and channel the responses into dedicated IDs (`user-greeting`, `user-topic`).
+- **Interactive Actions Row**: Consolidated the inline, travel tip, and budget controls inside a flex wrapper (`<div class="interactive-actions">`) while preserving inline JavaScript via the `onclick` attribute on the first button.
+- **Portal Snapshot Placement**: Introduced a standalone `<section class="section-card snapshot-section">` after the registration form with an unordered list that surfaces dynamic variables (support email, message, featured product).
+- **Team Grid Updates**: Rebuilt the team area using semantic `<section id="team">` and per-member `<article class="card">` blocks containing `<header>`, `.name`, `.role`, and descriptive `.detail` paragraphs. The markup keeps labels (`for` attributes), headings, and paragraph hierarchy clear.
+- **Form Enhancements**: Added paired email fields (primary and confirm) plus a `Verify` button that triggers email comparison. `label` elements remain bound to inputs through matching IDs.
+
+### CSS Adjustments
+- **Form Layout Utilities**: Added `.form-grid`, `.form-field`, `.action-row`, `.option-row`, and `.service-row` to create a reduced, multi-column registration form while safeguarding label/input alignment and accessibility spacing.
+- **Interactive Button Strip**: New `.interactive-actions` rule aligns the three interactive widgets horizontally, applies responsive wrapping, and centers feedback paragraphs beneath each button.
+- **Team Section Styling**: `#team`, `.team-grid`, and `.team-grid .card` were tuned to yield square-like cards (fixed flex-basis of one third, limited padding, controlled min-height). Typography was tightened by adjusting font sizes, line heights, and margin rhythm inside `.detail` paragraphs.
+- **Hero & Featured Content**: Feature block paragraphs were converted into a CSS grid with progressive accent backgrounds while maintaining original semantic tags.
+
+### JavaScript Features
+- **Initialization Workflow** (`initializePage` in embedded `<script>`):
+  - Fires on page load alongside the alert to greet visitors, prompt for their name/topic, and update text nodes dynamically.
+  - Declares variables (`travelerName`, `email`, `message`, `productName`) and injects their values into `portal-email`, `portal-message`, and `portal-product`.
+- **Email Validation** (`checkEmails` in embedded `<script>`):
+  - Retrieves values from `#email` and `#confirm-email`, compares them, and writes feedback with contextual color updates to `#email-feedback`.
+- **Message Toggle Utility** (`toggleMessage` helper):
+  - Centralizes show/hide behavior so only one interactive message is visible at a time; subsequent clicks toggle visibility or switch focus to a different message block.
+- **Inline Script Demonstration** (`handleInlineGreeting`):
+  - Keeps an inline `onclick` on the first button but delegates to a named function for clarity; message content is passed into `toggleMessage`.
+- **External Script** (`travel_portal.js`):
+  - `showTravelTip()` randomly selects from an array of guidance strings and leverages `toggleMessage` when available.
+  - `showBudgetEstimate()` computes a budget total (base + add-ons + contingency) and outputs the result via the toggle utility.
+  - Both functions include graceful fallbacks to direct DOM writes if the shared helper is unavailable.
+
+These enhancements keep the codebase aligned with course requirements while ensuring each tag, attribute, selector, and function serves a deliberate, documented purpose. Use this section as a quick-reference when demonstrating inline, embedded, and external behavior during presentations or assessments.
+
